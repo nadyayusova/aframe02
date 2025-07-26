@@ -76,7 +76,7 @@
         <a-box position="0 0 3" scale="5 1 0.1" color="#7072c2"></a-box>
       </a-entity> -->
 
-      <a-entity id="main-camera" position="0 0 4" wasd-rotate="speed:3" look-controls>
+      <a-entity id="main-camera" position="0 0 4" wasd-rotate="speed:3" look-controls auto-gyro-detect>
         <!-- <a-camera><a-cursor></a-cursor></a-camera> -->
         <a-camera wasd-controls="enabled:false;" look-controls="enabled:false;"></a-camera>
         <!-- <a-camera wasd-controls="fly:true;" look-controls="pointerLockEnabled:true;"></a-camera> -->
@@ -84,49 +84,6 @@
 
     </a-scene>
 
-    <script>
-      function isMobile() {
-        return /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent);
-      }
-
-      function hasGyroscopeSupport() {
-        return new Promise((resolve) => {
-          if (typeof DeviceOrientationEvent !== 'undefined' &&
-            typeof DeviceOrientationEvent.requestPermission === 'function') {
-            // iOS
-            DeviceOrientationEvent.requestPermission()
-              .then((response) => resolve(response === 'granted'))
-              .catch(() => resolve(false));
-          } else {
-            // Android
-            const listener = (event) => {
-              window.removeEventListener('deviceorientation', listener);
-              resolve(event && event.alpha !== null);
-            };
-            window.addEventListener('deviceorientation', listener);
-            setTimeout(() => resolve(false), 1000);
-          }
-        });
-      }
-
-      document.addEventListener('DOMContentLoaded', () => {
-        const camera = document.querySelector('#main-camera');
-
-        if (!camera) return;
-
-        if (!isMobile()) {
-          // Десктоп — оставить всё как есть
-          return;
-        }
-
-        hasGyroscopeSupport().then((hasGyro) => {
-          if (!hasGyro) {
-            // Смартфон без гироскопа — отключаем look-controls
-            camera.setAttribute('look-controls', 'enabled: false');
-          }
-        });
-      });
-    </script>
 
     <script src="scripts/index.js"></script>
   </body>
