@@ -32,22 +32,23 @@
 
       </a-assets>
 
-      <!-- <a-gltf-model rotation="0 0 0" position="0 0 0" src="#room"></a-gltf-model> -->
+      <a-gltf-model rotation="0 0 0" position="0 0 0" src="#room"></a-gltf-model>
 
       <a-sky src="#sky"></a-sky>
+
+      <a-light position="0 3 0" type="point" intensity="10"></a-light>
 
       <!-- Пол -->
       <a-plane position="0 -0.01 0" rotation="-90 0 0" width="10" height="10" color="#7BC8A4"></a-plane>
 
       <!-- Активные точки для перехода -->
-      <!-- TODO: сферы полупрозрачные на время разработки, потом сделать их прозрачными -->
-      <a-sphere class="clickable" position="2 0.02 -2" radius="0.5" scale="1 0.7 1" opacity="0.3">
+      <a-sphere class="clickable" position="3 0.02 -3" radius="0.5" scale="1 0.7 1" opacity="0">
         <a-image src="#hotpoint" rotation="-90 0 0" scale="0.3 0.3 0.3"></a-image>
       </a-sphere>
-      <a-sphere class="clickable" position="0 0.02 2" radius="0.5" scale="1 0.7 1" opacity="0.3">
+      <a-sphere class="clickable" position="0 0.02 4" radius="0.5" scale="1 0.7 1" opacity="0">
         <a-image src="#hotpoint" rotation="-90 0 0" scale="0.3 0.3 0.3"></a-image>
       </a-sphere>
-      <a-sphere class="clickable" position="-2 0.02 -2" radius="0.5" scale="1 0.7 1" opacity="0.3">
+      <a-sphere class="clickable" position="-3 0.02 -3" radius="0.5" scale="1 0.7 1" opacity="0">
         <a-image src="#hotpoint" rotation="-90 0 0" scale="0.3 0.3 0.3"></a-image>
       </a-sphere>
 
@@ -68,14 +69,14 @@
       </a-entity>
 
       <!-- 4 стены -->
-      <a-entity id="myroom" visible="true">
+      <!-- <a-entity id="myroom" visible="true">
         <a-box position="3 0 0" scale="0.1 1 5" color="#c17070"></a-box>
         <a-box position="0 0 -3" scale="5 1 0.1" color="#70c1c1"></a-box>
         <a-box position="-3 0 0" scale="0.1 1 5" color="#c2c070"></a-box>
         <a-box position="0 0 3" scale="5 1 0.1" color="#7072c2"></a-box>
-      </a-entity>
+      </a-entity> -->
 
-      <a-entity id="main-camera" wasd-rotate="speed:3" look-controls>
+      <a-entity id="main-camera" position="0 0 4" wasd-rotate="speed:3" look-controls>
         <!-- <a-camera><a-cursor></a-cursor></a-camera> -->
         <a-camera wasd-controls="enabled:false;" look-controls="enabled:false;"></a-camera>
         <!-- <a-camera wasd-controls="fly:true;" look-controls="pointerLockEnabled:true;"></a-camera> -->
