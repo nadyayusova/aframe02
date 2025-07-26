@@ -111,10 +111,17 @@
       <!-- Пол -->
       <a-plane position="0 -0.01 0" rotation="-90 0 0" width="10" height="10" color="#7BC8A4"></a-plane>
 
-      <!-- Активные точки для перехода (надо сделать сферы) -->
-      <a-image src="#hotpoint" class="clickable" position="2 0.02 -2" rotation="-90 0 0" scale="0.3 0.3 0.3"></a-image>
-      <a-image src="#hotpoint" class="clickable" position="0 0.02 2" rotation="-90 0 0" scale="0.3 0.3 0.3"></a-image>
-      <a-image src="#hotpoint" class="clickable" position="-2 0.02 -2" rotation="-90 0 0" scale="0.3 0.3 0.3"></a-image>
+      <!-- Активные точки для перехода -->
+      <!-- TODO: сферы полупрозрачные на время разработки, потом сделать их прозрачными -->
+      <a-sphere class="clickable" position="2 0.02 -2" radius="0.5" scale="1 0.7 1" opacity="0.3">
+        <a-image src="#hotpoint" rotation="-90 0 0" scale="0.3 0.3 0.3"></a-image>
+      </a-sphere>
+      <a-sphere class="clickable" position="0 0.02 2" radius="0.5" scale="1 0.7 1" opacity="0.3">
+        <a-image src="#hotpoint" rotation="-90 0 0" scale="0.3 0.3 0.3"></a-image>
+      </a-sphere>
+      <a-sphere class="clickable" position="-2 0.02 -2" radius="0.5" scale="1 0.7 1" opacity="0.3">
+        <a-image src="#hotpoint" rotation="-90 0 0" scale="0.3 0.3 0.3"></a-image>
+      </a-sphere>
 
       <!-- Helper - оси и плоскости -->
       <a-entity id="helpers" position="0 0 0" visible="false">
