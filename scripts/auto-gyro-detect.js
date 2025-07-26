@@ -4,6 +4,7 @@ AFRAME.registerComponent('auto-gyro-detect', {
 
     const mobileCheck = function () {
       let check = false;
+
       (function (a) {
         if (
           /(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|iris|kindle|lge |maemo|midp|mmp|mobile.+firefox|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows ce|xda|xiino/i.test(
@@ -15,14 +16,22 @@ AFRAME.registerComponent('auto-gyro-detect', {
         )
           check = true;
       })(navigator.userAgent || navigator.vendor || window.opera);
+
+      if (
+        navigator.userAgent.match(
+          /SAMSUNG|SGH-[I|N|T]|GT-[I|P|N]|SM-[N|P|T|Z|G]|SHV-E|SCH-[I|J|R|S]|SPH-L/i,
+        )
+      ) {
+        // alert("it's Samsung default browser");
+        check = true;
+      }
+
       return check;
     };
 
-    // const isMobile = /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent);
-
     if (!mobileCheck()) {
-      console.log('[auto-gyro-detect] Desktop detected — look-controls enabled');
-      return; // На десктопе не трогаем look-controls
+      console.log('[auto-gyro-detect] Desktop detected — leaving look-controls as-is');
+      return;
     }
 
     const hasGyroscopeSupport = () => {
@@ -31,7 +40,7 @@ AFRAME.registerComponent('auto-gyro-detect', {
           typeof DeviceOrientationEvent !== 'undefined' &&
           typeof DeviceOrientationEvent.requestPermission === 'function'
         ) {
-          // iOS 13+ требует разрешения
+          // iOS 13+ требует разрешение
           DeviceOrientationEvent.requestPermission()
             .then((response) => resolve(response === 'granted'))
             .catch(() => resolve(false));
@@ -50,10 +59,11 @@ AFRAME.registerComponent('auto-gyro-detect', {
 
     hasGyroscopeSupport().then((hasGyro) => {
       if (!hasGyro) {
-        console.warn('[auto-gyro-detect] No gyroscope — disabling look-controls');
+        alert('No gyroscope — disabling look-controls');
+        console.warn('[auto-gyro-detect] No gyroscope — disabling gyro tracking only');
         el.setAttribute('look-controls', 'magicWindowTrackingEnabled: false');
       } else {
-        console.log('[auto-gyro-detect] Gyroscope detected — look-controls enabled');
+        console.log('[auto-gyro-detect] Gyroscope available — keeping default look-controls');
       }
     });
   },
